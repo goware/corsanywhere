@@ -8,16 +8,20 @@ Inspired by https://github.com/Redocly/cors-anywhere
 
 ## Usage
 
+```shell
+$ go run github.com/goware/corsanywhere@latest -h
+```
+
+## Usage (another way, install then use)
+
 **Install:**
 
 ```shell
-go get -u github.com/goware/corsanywhere/cmd/corsanywhere
+$ go install github.com/goware/corsanywhere@latest
 ```
 
-**Terminal:**
-
 ```shell
-corsanywhere -port=8080
+$ corsanywhere -port=8080
 ```
 
 You can now send CORS-enabled requests to http://localhost:8080/<URL>.
