@@ -1,14 +1,36 @@
-package corsanywhere
+package main
 
 import (
+	"flag"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 	"time"
 
 	"github.com/go-chi/chi/v5"
 )
+
+var (
+	flags = flag.NewFlagSet("corsanywhere", flag.ExitOnError)
+	fPort = flags.String("port", "8080", "Local port to listen for this corsanywhere service")
+)
+
+func main() {
+	flags.Parse(os.Args[1:])
+
+	port := *fPort
+
+	fmt.Printf("CORS Anywhere started at http://localhost:%s\n", port)
+
+	err := http.ListenAndServe(fmt.Sprintf(":%s", port), CORSAnywhereHandler())
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
 
 func CORSAnywhereHandler() http.Handler {
 	r := chi.NewRouter()
